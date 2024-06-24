@@ -1,76 +1,67 @@
 import 'package:flutter/material.dart';
 
-class Formulario extends StatefulWidget {
+void main() => runApp(const formulario());
+
+class formulario extends StatefulWidget {
+  const formulario({super.key});
+
   @override
-  _FormularioState createState() => _FormularioState();
+  State<formulario> createState() => _formularioState();
 }
 
-class _FormularioState extends State<Formulario> {
+class _formularioState extends State<formulario> {
   final GlobalKey<FormState> estadoFormulario = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Formulario'),
-        ),
-        body: Container(
-          padding: EdgeInsets.all(15),
-          margin: EdgeInsets.all(20),
-          child: Form(
-            key: estadoFormulario,
-            child: Column(
-              children: [
+        title: 'Formulario',
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Formulario'),
+          ),
+          body: Container(
+            padding: EdgeInsets.all(15),
+            margin: EdgeInsets.all(20),
+            child: Form(
+              key: estadoFormulario,
+              child: Column(children: [
                 Container(
-                  child: TextFormField(
-                    decoration:
-                        const InputDecoration(hintText: "Correo electrónico"),
-                    validator: (value) {
-                      if (value == null || !value.contains("@")) {
-                        return "El correo no es válido";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                SizedBox(height: 20),
+                    child: TextFormField(
+                  validator: (value) {
+                    if (!value!.contains("@")) {
+                      return "El correo no es valido";
+                    } else {}
+                  },
+                  decoration: InputDecoration(hintText: "Correo electronico"),
+                )),
                 Container(
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(hintText: "Contraseña"),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "La contraseña no puede estar vacía";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                SizedBox(height: 20),
+                    child: TextFormField(
+                  //container con textfield de contraseña
+                  obscureText: true,
+                  validator: (value) {
+                    if (value!.length < 6) {
+                      return "Debe tener minimo 6 caracteres";
+                    }
+                  },
+                  decoration: InputDecoration(hintText: "Contraseña"),
+                )),
                 Container(
-                  padding: EdgeInsets.only(top: 10),
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      if (estadoFormulario.currentState!.validate()) {
-                        print("Excelente");
-                      } else {
-                        print("Error!");
-                      }
-                    },
-                    child: const Text("Validar"),
-                  ),
-                ),
-              ],
+                    padding: EdgeInsets.only(top: 10),
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        if (estadoFormulario.currentState!.validate()) {
+                          print("Excelente");
+                        } else {
+                          print("Error!");
+                        }
+                      },
+                      child: const Text("Validar"),
+                    ))
+              ]),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
-}
-
-void main() {
-  runApp(Formulario());
 }

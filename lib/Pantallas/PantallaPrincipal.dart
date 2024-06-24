@@ -54,7 +54,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                 // Puedes reemplazar esto con la lógica que necesites
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Formulario()),
+                  MaterialPageRoute(builder: (context) => formulario()),
                 );
               },
               child: const Text("Ir al Formulario"),
